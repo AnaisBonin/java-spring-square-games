@@ -14,4 +14,6 @@ public class HeartbeatController {
     public int getHeartbeat(){
         return heartbeatSensor.get();
     };
+
+
 }
