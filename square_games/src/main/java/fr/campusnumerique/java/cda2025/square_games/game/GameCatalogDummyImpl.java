@@ -8,10 +8,10 @@ import java.util.Collections;
 
 @Service
 public class GameCatalogDummyImpl implements GameCatalog {
-    TicTacToeGameFactory ticTacToeGameFactory = new fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory();
+    TicTacToeGameFactory ticTacToeGameFactory = new TicTacToeGameFactory();
 
     @Override
     public Collection<String> getGameIdentifiers() {
-        return Collections.singleton(ticTacToeGameFactory.getGameId());
+        return Collections.singleton(ticTacToeGameFactory.getGameFactoryId());
     }
 }

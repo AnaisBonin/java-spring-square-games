@@ -12,6 +12,9 @@ public class GameController {
     @Autowired
     private GameCatalog gameCatalog;
 
+    @Autowired
+    private GameService gameService;
+
     @GetMapping("/game_catalog")
     public Collection<String> getGameCatalog(){
         return gameCatalog.getGameIdentifiers();
