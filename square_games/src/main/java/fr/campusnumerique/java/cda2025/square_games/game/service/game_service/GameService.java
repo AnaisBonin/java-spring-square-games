@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.game;
+package fr.campusnumerique.java.cda2025.square_games.game.service.game_service;
 
 import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.GameFactory;

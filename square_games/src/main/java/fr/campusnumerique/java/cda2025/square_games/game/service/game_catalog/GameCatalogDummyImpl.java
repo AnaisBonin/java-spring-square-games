@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.game;
+package fr.campusnumerique.java.cda2025.square_games.game.service.game_catalog;
 
 import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory;
 import org.springframework.stereotype.Service;
