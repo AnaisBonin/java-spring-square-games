@@ -4,6 +4,7 @@ import fr.campusnumerique.java.cda2025.square_games.game.service.game_catalog.Ga
 import fr.campusnumerique.java.cda2025.square_games.game.service.GameCreationParams;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_service.GameService;
 import fr.campusnumerique.java.cda2025.square_games.game.users.UserCreationParams;
+import fr.le_campus_numerique.square_games.engine.GameFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,8 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping("/game_catalog")
-    public Collection<String> getGameCatalog(){
-        return gameCatalog.getGameIdentifiers();
+    public Collection<GameFactory> getGameCatalog(){
+        return gameCatalog.getGamesAvailable();
     };
 
     @PostMapping("/games")

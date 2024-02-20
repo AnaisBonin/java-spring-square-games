@@ -6,8 +6,13 @@ import fr.le_campus_numerique.square_games.engine.GameFactory;
 import java.util.Collection;
 
 public interface GameService {
-Game create(String gameName);
-Collection<Game> getAllGames();
-Game editGame();
-void deleteGame();
+    Game create(String gameName);
+
+    Collection<Game> getAllGames();
+
+    Game getGameById(String gameId);
+
+    Game editGame(String gameId);
+
+    void deleteGame(String gameId);
 }
