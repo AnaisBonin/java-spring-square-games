@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Locale;
 import java.util.UUID;
 
 @RestController
@@ -19,6 +20,11 @@ public class GameController {
 
     @Autowired
     private GameService gameService;
+
+    @GetMapping("/local_name")
+    public String getTest(@RequestHeader("Accept-Language") Locale locale) {
+        return gameService.getLocalName(locale);
+    }
 
     @GetMapping("/game_catalog")
     public Collection<GameFactory> getGameCatalog(){

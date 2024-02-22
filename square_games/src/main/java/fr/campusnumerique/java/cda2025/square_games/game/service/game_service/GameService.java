@@ -5,9 +5,12 @@ import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.GameCreat
 import fr.le_campus_numerique.square_games.engine.Game;
 
 import java.util.Collection;
+import java.util.Locale;
 
 public interface GameService {
     GameDTO create(GameCreationParams params);
+
+    String getLocalName(Locale locale);
 
     Collection<GameDTO> getAllGames();
 
