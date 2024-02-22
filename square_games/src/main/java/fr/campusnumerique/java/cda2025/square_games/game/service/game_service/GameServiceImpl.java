@@ -1,7 +1,7 @@
 package fr.campusnumerique.java.cda2025.square_games.game.service.game_service;
 
-import fr.campusnumerique.java.cda2025.square_games.game.controller.GameDTO;
-import fr.campusnumerique.java.cda2025.square_games.game.service.GameCreationParams;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.GameDTO;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.GameCreationParams;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_catalog.GameCatalog;
 import fr.le_campus_numerique.square_games.engine.Game;
 import org.springframework.beans.factory.annotation.Autowired;

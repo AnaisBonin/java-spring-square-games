@@ -1,10 +1,10 @@
 package fr.campusnumerique.java.cda2025.square_games.game.controller;
 
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.GameDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_catalog.GameCatalog;
-import fr.campusnumerique.java.cda2025.square_games.game.service.GameCreationParams;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.GameCreationParams;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_service.GameService;
 import fr.campusnumerique.java.cda2025.square_games.game.users.UserCreationParams;
-import fr.le_campus_numerique.square_games.engine.Game;
 import fr.le_campus_numerique.square_games.engine.GameFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +23,11 @@ public class GameController {
     @GetMapping("/game_catalog")
     public Collection<GameFactory> getGameCatalog(){
         return gameCatalog.getGamesAvailable();
+    };
+
+    @GetMapping("/games")
+    public Collection<GameDTO> getGames(){
+        return gameService.getAllGames();
     };
 
     @PostMapping("/games")
