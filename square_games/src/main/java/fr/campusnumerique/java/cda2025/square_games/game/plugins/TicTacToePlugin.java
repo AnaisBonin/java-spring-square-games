@@ -9,10 +9,10 @@ import java.util.Locale;
 public class TicTacToePlugin extends GamePluginImpl {
 
     @Value("game.tictactoe.default-player-count")
-    private int playerCount;
+    private String playerCount;
 
     @Value("game.tictactoe.default-boardsize")
-    private int boardsize;
+    private String boardsize;
 
     @Override
     public String getName(Locale locale) {

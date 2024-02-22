@@ -9,10 +9,10 @@ import java.util.Locale;
 public class ConnectFourPlugin extends GamePluginImpl {
 
     @Value("game.connect4.default-player-count")
-    private int playerCount;
+    private String playerCount;
 
     @Value("game.connect4.default-boardsize")
-    private int boardsize;
+    private String boardsize;
 
     @Override
     public String getName(Locale locale) {

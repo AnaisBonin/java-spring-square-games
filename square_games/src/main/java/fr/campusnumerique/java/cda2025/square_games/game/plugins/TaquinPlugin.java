@@ -9,10 +9,10 @@ import java.util.Locale;
 public class TaquinPlugin extends GamePluginImpl {
 
     @Value("game.taquin.default-player-count")
-    private int playerCount;
+    private String playerCount;
 
     @Value("game.taquin.default-boardsize")
-    private int boardsize;
+    private String boardsize;
 
     @Override
     public String getName(Locale locale) {
