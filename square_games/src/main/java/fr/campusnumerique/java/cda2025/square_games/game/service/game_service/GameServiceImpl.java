@@ -1,5 +1,6 @@
 package fr.campusnumerique.java.cda2025.square_games.game.service.game_service;
 
+import fr.campusnumerique.java.cda2025.square_games.game.controller.GameDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.service.GameCreationParams;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_catalog.GameCatalog;
 import fr.le_campus_numerique.square_games.engine.Game;
@@ -16,17 +17,19 @@ public class GameServiceImpl implements GameService {
     @Autowired
     GameCatalog gameCatalog;
 
-    private final Map<String, Game> gamesMap = new HashMap<>();
+    private final Map<String, GameDTO> gamesMap = new HashMap<>();
 
     @Override
-    public Game create(GameCreationParams params) {
+    public GameDTO create(GameCreationParams params) {
         Game game = gameCatalog.createGame(params);
-        gamesMap.put(game.getId().toString(), game);
-        return game;
+        GameDTO gameDTO = new GameDTO(game.getFactoryId(), game.getBoardSize(), 2);
+        gamesMap.put(game.getId().toString(), gameDTO);
+
+        return gameDTO;
     }
 
     @Override
-    public Collection<Game> getAllGames() {
+    public Collection<GameDTO> getAllGames() {
         return gamesMap.values();
     }
 

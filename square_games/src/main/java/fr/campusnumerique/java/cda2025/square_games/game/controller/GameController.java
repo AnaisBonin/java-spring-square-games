@@ -26,9 +26,8 @@ public class GameController {
     };
 
     @PostMapping("/games")
-    public Game createGame(@RequestBody GameCreationParams params) {
-        Game game = gameService.create(params);
-        return game;
+    public GameDTO createGame(@RequestBody GameCreationParams params) {
+        return gameService.create(params);
     }
 
     @GetMapping("/games/{gameId}")
