@@ -1,5 +1,6 @@
 package fr.campusnumerique.java.cda2025.square_games.game.plugins;
 
+import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +10,14 @@ import java.util.Locale;
 public class TicTacToePlugin extends GamePluginImpl {
 
     @Value("game.tictactoe.default-player-count")
-    private String playerCount;
+    private String defaultPlayerCount;
 
     @Value("game.tictactoe.default-boardsize")
-    private String boardsize;
+    private String defaultBoardSize;
+
+    public TicTacToePlugin() {
+        super(new TicTacToeGameFactory());
+    }
 
     @Override
     public String getName(Locale locale) {
