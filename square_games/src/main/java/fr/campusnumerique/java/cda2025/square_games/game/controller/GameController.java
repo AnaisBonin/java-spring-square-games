@@ -1,7 +1,9 @@
 package fr.campusnumerique.java.cda2025.square_games.game.controller;
 
+import fr.campusnumerique.java.cda2025.square_games.game.DAO.user.UserDAO;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.GameDTO;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_catalog.GameCatalog;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.GameCreationParams;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_service.GameService;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -20,6 +23,8 @@ public class GameController {
 
     @Autowired
     private GameService gameService;
+
+    @Autowired UserDAO userDAO;
 
     @GetMapping("/local_name")
     public String getTest(@RequestHeader("Accept-Language") Locale locale) {
@@ -54,13 +59,13 @@ public class GameController {
     }
 
     @GetMapping("/users")
-    public Collection<User> getUsers(){
-        return null;
+    public List<UserDTO> getUsers(){
+        return userDAO.getAllUsers();
     }
 
     @GetMapping("/users/{userId}")
-    public User getUser(@PathVariable String userId){
-        return null;
+    public UserDTO getUserById(@PathVariable UUID userId){
+        return userDAO.getUserById(userId);
     }
 
     @GetMapping("users?{isConnected}")
@@ -69,9 +74,8 @@ public class GameController {
     }
 
     @PostMapping("/users")
-    public Object createUser(@RequestBody User user) {
-        // TODO create a new user
-        return UUID.randomUUID().toString();
+    public UserDTO createUser(@RequestBody UserDTO userDTO) {
+        return userDAO.addUser(userDTO);
     }
 
     @PutMapping("/users/{userId}")

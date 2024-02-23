@@ -3,9 +3,11 @@ package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class UserDAOImpl implements UserDAO {
     private final List<User> usersList = new ArrayList<>();
 
@@ -20,7 +22,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public UserDTO getUserById(UUID id) {
-        return null;
+        User userById = usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
+        return createUserDTO(userById);
     }
 
     @Override
@@ -38,6 +41,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void deleteUser(UUID id) {
+//        UserDTO userToDelete = usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
+//        usersList.
 
     }
 }
