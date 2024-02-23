@@ -1,10 +1,10 @@
 package fr.campusnumerique.java.cda2025.square_games.game.controller;
 
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.GameDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_catalog.GameCatalog;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.GameCreationParams;
 import fr.campusnumerique.java.cda2025.square_games.game.service.game_service.GameService;
-import fr.campusnumerique.java.cda2025.square_games.game.users.UserCreationParams;
 import fr.le_campus_numerique.square_games.engine.GameFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -54,22 +54,22 @@ public class GameController {
     }
 
     @GetMapping("/users")
-    public Collection<UserCreationParams> getUsers(){
+    public Collection<User> getUsers(){
         return null;
     }
 
     @GetMapping("/users/{userId}")
-    public UserCreationParams getUser(@PathVariable String userId){
+    public User getUser(@PathVariable String userId){
         return null;
     }
 
     @GetMapping("users?{isConnected}")
-    public Collection<UserCreationParams> getConnectedUsers(@PathVariable boolean isConnected) {
+    public Collection<User> getConnectedUsers(@PathVariable boolean isConnected) {
         return null;
     }
 
     @PostMapping("/users")
-    public Object createUser(@RequestBody UserCreationParams userCreationParams) {
+    public Object createUser(@RequestBody User user) {
         // TODO create a new user
         return UUID.randomUUID().toString();
     }

@@ -1,14 +1,15 @@
 package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 
-import org.apache.catalina.User;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface UserDAO {
     public List<User> getAllUsers();
-    public User getUserById(int id);
-    public void addUser(User user);
-    public void updateUser(User user);
-    public void deleteUser(int id);
+    public User getUserById(UUID id);
+    public User addUser(User user);
+    public User updateUser(UUID id);
+    public void deleteUser(UUID id);
 }
 

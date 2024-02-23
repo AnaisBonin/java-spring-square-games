@@ -1,13 +1,16 @@
 package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
-@SpringBootApplication
-public class MySQLUserDAO implements UserDAO {
+public class UserDAOImpl implements UserDAO {
+    private final Map<String, UserDTO> usersMap = new HashMap<>();
+
     @Override
     public List<User> getAllUsers() {
         return null;
