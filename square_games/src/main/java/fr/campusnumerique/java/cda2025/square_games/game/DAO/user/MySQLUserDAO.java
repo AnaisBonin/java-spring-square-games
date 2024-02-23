@@ -7,29 +7,29 @@ import java.util.List;
 import java.util.UUID;
 
 @SpringBootApplication
-public class MySQLUserDAO implements UserDAO {
-    @Override
-    public List<User> getAllUsers() {
-        return null;
-    }
-
-    @Override
-    public User getUserById(UUID id) {
-        return null;
-    }
-
-    @Override
-    public User addUser(User user) {
-        return null;
-    }
-
-    @Override
-    public User updateUser(UUID id) {
-        return null;
-    }
-
-    @Override
-    public void deleteUser(UUID id) {
-
-    }
+public class MySQLUserDAO {
+//    @Override
+//    public List<User> getAllUsers() {
+//        return null;
+//    }
+//
+//    @Override
+//    public User getUserById(UUID id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public UserDTO addUser(UserDTO userDTO) {
+//        return null;
+//    }
+//
+//    @Override
+//    public User updateUser(UUID id) {
+//        return null;
+//    }
+//
+//    @Override
+//    public void deleteUser(UUID id) {
+//
+//    }
 }
