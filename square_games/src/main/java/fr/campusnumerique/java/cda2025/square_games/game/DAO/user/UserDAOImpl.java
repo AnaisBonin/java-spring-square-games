@@ -1,33 +1,38 @@
 package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class UserDAOImpl implements UserDAO {
-    private final Map<String, UserDTO> usersMap = new HashMap<>();
+    private final List<User> usersList = new ArrayList<>();
+
+    private UserDTO createUserDTO(User user) {
+        return new UserDTO(user.getUserName(), user.getFullName());
+    }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
+        return usersList.stream().map(this::createUserDTO).toList();
+    }
+
+    @Override
+    public UserDTO getUserById(UUID id) {
         return null;
     }
 
     @Override
-    public User getUserById(UUID id) {
-        return null;
+    public UserDTO addUser(UserDTO userDTO) {
+        User createdUser = new UserImpl(userDTO.userName(), userDTO.fullName());
+        usersList.add(createdUser);
+
+        return createUserDTO(createdUser);
     }
 
     @Override
-    public User addUser(User user) {
-        return null;
-    }
-
-    @Override
-    public User updateUser(UUID id) {
+    public UserDTO updateUser(UUID id) {
         return null;
     }
 
