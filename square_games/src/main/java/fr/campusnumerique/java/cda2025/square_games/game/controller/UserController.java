@@ -27,8 +27,9 @@ public class UserController {
 
     @GetMapping("/users")
     public List<UserDTO> getUsers(){
-        List<User> userList = userDAO.getAllUsers();
-        return null;
+        List<User> usersList = userDAO.getAllUsers();
+
+        return usersList.stream().map(this::transformIntoUserDTO).toList();
     }
 
     @GetMapping("/users/{userId}")
@@ -49,9 +50,9 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}")
-    public Object updateUser(@PathVariable String userId) {
-        //TODO update user with id 'userId'
-        return null;
+    public Object updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO) {
+        User user = userDAO.updateUser(userId, transformIntoUser(userDTO));
+        return transformIntoUserDTO(user);
     }
 
     @DeleteMapping("/users/{userId}")

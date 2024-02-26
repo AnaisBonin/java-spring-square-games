@@ -10,6 +10,16 @@ import java.util.*;
 public class UserDAOImpl implements UserDAO {
     private final List<User> usersList = new ArrayList<>();
 
+    private int getUserIndex(UUID userId) {
+        for (int i = 0; i < usersList.toArray().length; i++) {
+            if (usersList.get(i).getId() == userId) {
+                return i;
+            }
+        }
+        System.out.println("Error, user not found");
+        return -1;
+    }
+
     @Override
     public List<User> getAllUsers() {
         return usersList;
@@ -29,11 +39,10 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User updateUser(UUID id, User user) {
-//        int userIndex = usersList.indexOf();
-//
-//        usersList.set(userIndex, user);
+        int userIndex = getUserIndex(id);
+        usersList.set(userIndex, user);
 
-    return null;
+        return user;
     }
 
     @Override
