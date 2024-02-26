@@ -1,7 +1,6 @@
 package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -11,13 +10,13 @@ public class UserDAOImpl implements UserDAO {
     private final List<User> usersList = new ArrayList<>();
 
     private int getUserIndex(UUID userId) {
+        int indexUser = -1;
         for (int i = 0; i < usersList.toArray().length; i++) {
-            if (usersList.get(i).getId() == userId) {
-                return i;
+            if (usersList.get(i).getId().equals(userId)) {
+                indexUser = i;
             }
         }
-        System.out.println("Error, user not found");
-        return -1;
+        return indexUser;
     }
 
     @Override
@@ -27,28 +26,36 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getUserById(UUID id) {
-        return usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
+        int userIndex = getUserIndex(id);
+        return usersList.get(userIndex);
     }
 
     @Override
     public User addUser(User user) {
         usersList.add(user);
-
         return user;
     }
 
     @Override
     public User updateUser(UUID id, User user) {
         int userIndex = getUserIndex(id);
-        usersList.set(userIndex, user);
 
-        return user;
+        if (userIndex == -1) {
+            return null;
+        } else {
+            usersList.set(userIndex, user);
+
+            return user;
+        }
     }
 
     @Override
-    public void deleteUser(UUID id) {
-//        User userToDelete = usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
-//        usersList.
+    public User deleteUser(UUID id) {
+        int userIndex = getUserIndex(id);
+        User user = getUserById(id);
+        usersList.remove(userIndex);
 
+        System.out.println("User " + id + " deleted");
+        return user;
     }
 }
