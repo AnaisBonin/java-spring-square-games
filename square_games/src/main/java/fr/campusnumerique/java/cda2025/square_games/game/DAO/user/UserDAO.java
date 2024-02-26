@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserDAO {
-    public List<UserDTO> getAllUsers();
-    public UserDTO getUserById(UUID id);
-    public UserDTO addUser(UserDTO userDTO);
-    public UserDTO updateUser(UUID id);
+    public List<User> getAllUsers();
+    public User getUserById(UUID id);
+    public User addUser(User user);
+    public User updateUser(UUID id, User user);
     public void deleteUser(UUID id);
 }
 

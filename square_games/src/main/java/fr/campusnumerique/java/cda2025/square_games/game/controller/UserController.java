@@ -2,6 +2,7 @@ package fr.campusnumerique.java.cda2025.square_games.game.controller;
 
 import fr.campusnumerique.java.cda2025.square_games.game.DAO.user.UserDAO;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +17,24 @@ public class UserController {
     @Autowired
     UserDAO userDAO;
 
+    private UserDTO transformIntoUserDTO(User user) {
+        return new UserDTO(user.getId(), user.getUserName(), user.getFullName());
+    }
+
+    private User transformIntoUser(UserDTO userDTO) {
+        return new UserImpl(userDTO.userName(), userDTO.fullName());
+    }
+
     @GetMapping("/users")
     public List<UserDTO> getUsers(){
-        return userDAO.getAllUsers();
+        List<User> userList = userDAO.getAllUsers();
+        return null;
     }
 
     @GetMapping("/users/{userId}")
     public UserDTO getUserById(@PathVariable UUID userId){
-        return userDAO.getUserById(userId);
+        User user = userDAO.getUserById(userId);
+        return transformIntoUserDTO(user);
     }
 
     @GetMapping("users?{isConnected}")
@@ -33,7 +44,8 @@ public class UserController {
 
     @PostMapping("/users")
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
-        return userDAO.addUser(userDTO);
+        User user = userDAO.addUser(transformIntoUser(userDTO));
+        return transformIntoUserDTO(user);
     }
 
     @PutMapping("/users/{userId}")

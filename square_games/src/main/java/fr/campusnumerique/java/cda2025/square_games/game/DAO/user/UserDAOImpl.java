@@ -2,7 +2,6 @@ package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -11,37 +10,35 @@ import java.util.*;
 public class UserDAOImpl implements UserDAO {
     private final List<User> usersList = new ArrayList<>();
 
-    private UserDTO createUserDTO(User user) {
-        return new UserDTO(user.getUserName(), user.getFullName());
+    @Override
+    public List<User> getAllUsers() {
+        return usersList;
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
-        return usersList.stream().map(this::createUserDTO).toList();
+    public User getUserById(UUID id) {
+        return usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
     }
 
     @Override
-    public UserDTO getUserById(UUID id) {
-        User userById = usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
-        return createUserDTO(userById);
+    public User addUser(User user) {
+        usersList.add(user);
+
+        return user;
     }
 
     @Override
-    public UserDTO addUser(UserDTO userDTO) {
-        User createdUser = new UserImpl(userDTO.userName(), userDTO.fullName());
-        usersList.add(createdUser);
+    public User updateUser(UUID id, User user) {
+//        int userIndex = usersList.indexOf();
+//
+//        usersList.set(userIndex, user);
 
-        return createUserDTO(createdUser);
-    }
-
-    @Override
-    public UserDTO updateUser(UUID id) {
-        return null;
+    return null;
     }
 
     @Override
     public void deleteUser(UUID id) {
-//        UserDTO userToDelete = usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
+//        User userToDelete = usersList.stream().filter(user -> user.getId() == id).toList().getFirst();
 //        usersList.
 
     }
