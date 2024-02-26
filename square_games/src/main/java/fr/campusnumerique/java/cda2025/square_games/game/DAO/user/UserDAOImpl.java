@@ -1,5 +1,6 @@
 package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 
+import fr.campusnumerique.java.cda2025.square_games.game.DbAccess;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +8,13 @@ import java.util.*;
 
 @Service
 public class UserDAOImpl implements UserDAO {
+    private DbAccess dbAccess;
+
     private final List<User> usersList = new ArrayList<>();
+
+    public UserDAOImpl() {
+        dbAccess = DbAccess.getInstance();
+    }
 
     private int getUserIndex(UUID userId) {
         int indexUser = -1;
