@@ -80,10 +80,52 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
+    public int getId (String pseudo) {
+        String query = "SELECT id FROM users WHERE pseudo=?;";
+
+        try {
+            PreparedStatement preparedStatement = dbAccess.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, pseudo);
+
+            ResultSet res = preparedStatement.executeQuery();
+
+            res.next();
+            return res.getInt(1);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return 0;
+    }
+
+    private void updateUserId(User user) {
+        int userId = getId(user.getPseudo());
+        user.setId(userId);
+    }
+
     @Override
     public User addUser(User user) {
-        usersList.add(user);
-        return user;
+        String query = "INSERT INTO users (firstname, lastname, pseudo) VALUES(?, ?, ?);";
+
+        try {
+            PreparedStatement preparedStatement = dbAccess.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getPseudo());
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("Created user - query affected: " + affectedRows + " rows");
+
+            updateUserId(user);
+
+            return user;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
     }
 
     @Override
