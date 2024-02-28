@@ -18,11 +18,11 @@ public class UserController {
     UserDAO userDAO;
 
     private UserDTO transformIntoUserDTO(User user) {
-        return new UserDTO(user.getId(), user.getUserName(), user.getFullName());
+        return new UserDTO(user.getId(), user.getFirstName(), user.getLastName(), user.getPseudo());
     }
 
     private User transformIntoUser(UserDTO userDTO) {
-        return new UserImpl(userDTO.userName(), userDTO.fullName());
+        return new UserImpl(userDTO.firstName(), userDTO.lastName(), userDTO.pseudo());
     }
 
     @GetMapping("/users")

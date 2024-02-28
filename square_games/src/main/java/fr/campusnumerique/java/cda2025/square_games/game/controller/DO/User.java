@@ -4,6 +4,10 @@ import java.util.UUID;
 
 public interface User {
     UUID getId();
-    String getFullName();
-    String getUserName();
+    String getFirstName();
+    void setFirstName(String firstName);
+    String getLastName();
+    void setLastName(String lastName);
+    String getPseudo();
+    void setPseudo(String pseudo);
 }

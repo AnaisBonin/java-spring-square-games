@@ -4,32 +4,48 @@ import java.util.UUID;
 
 public class UserImpl implements User {
     private final UUID id;
-    private String userName;
-    private String fullName;
+    private String firstName;
+    private String lastName;
+    private String pseudo;
 
-    public UserImpl(String userName, String fullName) {
+    public UserImpl(String firstName, String lastName, String pseudo) {
         this.id = UUID.randomUUID();
-        this.userName = userName;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pseudo = pseudo;
     }
 
     public UUID getId() {
         return id;
     }
 
-    public String getUserName() {
-        return userName;
+    @Override
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    @Override
+       public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getFullName() {
-        return fullName;
+    @Override
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    @Override
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Override
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    @Override
+     public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
     }
 };

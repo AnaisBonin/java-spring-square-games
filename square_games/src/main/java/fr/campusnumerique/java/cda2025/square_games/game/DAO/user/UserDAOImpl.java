@@ -2,6 +2,7 @@ package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
 
 import fr.campusnumerique.java.cda2025.square_games.game.DbAccess;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -24,6 +25,14 @@ public class UserDAOImpl implements UserDAO {
             }
         }
         return indexUser;
+    }
+
+    private User createUserWithSQLRes(ResultSet res) throws SQLException {
+        String firstName = res.getString(2);
+        String lastName = res.getString(3);
+        String pseudo = res.getString(4);
+
+        return new UserImpl(firstName, lastName, pseudo);
     }
 
     @Override
