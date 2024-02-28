@@ -5,11 +5,14 @@ import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 @Service
 public class UserDAOImpl implements UserDAO {
-    private DbAccess dbAccess;
+    private final DbAccess dbAccess;
 
     private final List<User> usersList = new ArrayList<>();
 
@@ -37,6 +40,21 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAllUsers() {
+        String query = "SELECT * FROM users;";
+
+        List<User> usersList = new ArrayList<>();
+
+        try {
+            Statement statement = dbAccess.getConnection().createStatement();
+            ResultSet res = statement.executeQuery(query);
+            while (res.next()) {
+                User user = createUserWithSQLRes(res);
+                usersList.add(user);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
         return usersList;
     }
 
