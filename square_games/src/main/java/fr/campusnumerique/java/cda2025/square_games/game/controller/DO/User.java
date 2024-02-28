@@ -1,9 +1,8 @@
 package fr.campusnumerique.java.cda2025.square_games.game.controller.DO;
 
-import java.util.UUID;
-
 public interface User {
-    UUID getId();
+    int getId();
+    void setId(int id);
     String getFirstName();
     void setFirstName(String firstName);
     String getLastName();

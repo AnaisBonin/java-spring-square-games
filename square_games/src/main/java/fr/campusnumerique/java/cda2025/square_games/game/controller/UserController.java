@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 public class UserController {
@@ -22,7 +21,7 @@ public class UserController {
     }
 
     private User transformIntoUser(UserDTO userDTO) {
-        return new UserImpl(userDTO.firstName(), userDTO.lastName(), userDTO.pseudo());
+        return new UserImpl(userDTO.id(), userDTO.firstName(), userDTO.lastName(), userDTO.pseudo());
     }
 
     @GetMapping("/users")
@@ -33,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public UserDTO getUserById(@PathVariable UUID userId){
+    public UserDTO getUserById(@PathVariable int userId){
         User user = userDAO.getUserById(userId);
         return transformIntoUserDTO(user);
     }
@@ -50,13 +49,13 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}")
-    public Object updateUser(@PathVariable UUID userId, @RequestBody UserDTO userDTO) {
+    public Object updateUser(@PathVariable int userId, @RequestBody UserDTO userDTO) {
         User user = userDAO.updateUser(userId, transformIntoUser(userDTO));
         return transformIntoUserDTO(user);
     }
 
     @DeleteMapping("/users/{userId}")
-    public Object deleteUser(@PathVariable UUID userId) {
+    public Object deleteUser(@PathVariable int userId) {
         User user = userDAO.deleteUser(userId);
         return transformIntoUserDTO(user);
     }

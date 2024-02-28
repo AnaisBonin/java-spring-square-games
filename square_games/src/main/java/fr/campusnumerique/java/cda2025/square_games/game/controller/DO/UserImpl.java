@@ -1,22 +1,25 @@
 package fr.campusnumerique.java.cda2025.square_games.game.controller.DO;
 
-import java.util.UUID;
-
 public class UserImpl implements User {
-    private final UUID id;
+    private int id;
     private String firstName;
     private String lastName;
     private String pseudo;
 
-    public UserImpl(String firstName, String lastName, String pseudo) {
-        this.id = UUID.randomUUID();
+    public UserImpl(int id, String firstName, String lastName, String pseudo) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.pseudo = pseudo;
     }
 
-    public UUID getId() {
+    @Override
+    public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

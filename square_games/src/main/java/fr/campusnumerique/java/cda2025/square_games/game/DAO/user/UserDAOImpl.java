@@ -20,10 +20,10 @@ public class UserDAOImpl implements UserDAO {
         dbAccess = DbAccess.getInstance();
     }
 
-    private int getUserIndex(UUID userId) {
+    private int getUserIndex(int userId) {
         int indexUser = -1;
         for (int i = 0; i < usersList.toArray().length; i++) {
-            if (usersList.get(i).getId().equals(userId)) {
+            if (usersList.get(i).getId() == userId) {
                 indexUser = i;
             }
         }
@@ -31,11 +31,12 @@ public class UserDAOImpl implements UserDAO {
     }
 
     private User createUserWithSQLRes(ResultSet res) throws SQLException {
+        int id = res.getInt(1);
         String firstName = res.getString(2);
         String lastName = res.getString(3);
         String pseudo = res.getString(4);
 
-        return new UserImpl(firstName, lastName, pseudo);
+        return new UserImpl(id, firstName, lastName, pseudo);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User updateUser(UUID id, User user) {
+    public User updateUser(int id, User user) {
         int userIndex = getUserIndex(id);
 
         if (userIndex == -1) {
@@ -84,7 +85,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User deleteUser(UUID id) {
+    public User deleteUser(int id) {
         int userIndex = getUserIndex(id);
         User user = getUserById(id);
         usersList.remove(userIndex);
