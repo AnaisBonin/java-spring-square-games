@@ -56,8 +56,7 @@ public class UserController {
 
     @DeleteMapping("/users/{userId}")
     public Object deleteUser(@PathVariable int userId) {
-        User user = userDAO.deleteUser(userId);
-        return transformIntoUserDTO(user);
+        return userDAO.deleteUser(userId);
     }
 
 }

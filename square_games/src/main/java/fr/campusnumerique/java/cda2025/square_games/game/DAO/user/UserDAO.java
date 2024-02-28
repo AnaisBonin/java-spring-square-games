@@ -13,6 +13,6 @@ public interface UserDAO {
 
     User updateUser(int id, User user);
 
-    User deleteUser(int id);
+    String deleteUser(int id);
 }
 

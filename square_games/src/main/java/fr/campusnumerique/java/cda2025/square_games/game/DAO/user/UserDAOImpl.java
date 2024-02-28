@@ -155,12 +155,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User deleteUser(int id) {
-        int userIndex = getUserIndex(id);
-        User user = getUserById(id);
-        usersList.remove(userIndex);
+    public String deleteUser(int id) {
+        String query = "DELETE FROM users WHERE id = ?;";
+        String deletionMessage = "error";
 
-        System.out.println("User " + id + " deleted");
-        return user;
+        try {
+            PreparedStatement preparedStatement = dbAccess.getConnection().prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("Created user - query affected: " + affectedRows + " rows");
+
+            deletionMessage = "User " + id + " deleted";
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return deletionMessage;
     }
 }
