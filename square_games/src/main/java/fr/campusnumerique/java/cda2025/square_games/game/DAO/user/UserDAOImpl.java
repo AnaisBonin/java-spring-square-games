@@ -130,15 +130,28 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User updateUser(int id, User user) {
-        int userIndex = getUserIndex(id);
+        String query = "UPDATE users SET firstName = ?, lastName = ?, pseudo = ? WHERE id = ?;";
 
-        if (userIndex == -1) {
-            return null;
-        } else {
-            usersList.set(userIndex, user);
+        try {
+            PreparedStatement preparedStatement = dbAccess.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getPseudo());
+            preparedStatement.setInt(4, id);
+
+
+            int affectedRows = preparedStatement.executeUpdate();
+            System.out.println("Created user - query affected: " + affectedRows + " rows");
+
+            updateUserId(user);
 
             return user;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
+
+        return null;
     }
 
     @Override
