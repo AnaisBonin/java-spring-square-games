@@ -5,6 +5,7 @@ import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
 import org.springframework.stereotype.Service;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -60,9 +61,23 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getUserById(UUID id) {
-        int userIndex = getUserIndex(id);
-        return usersList.get(userIndex);
+    public User getUserById(int id) {
+        String query = "SELECT * FROM users WHERE id=?;";
+
+        try {
+            PreparedStatement preparedStatement = dbAccess.getConnection().prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            ResultSet res = preparedStatement.executeQuery();
+
+            res.next();
+            return createUserWithSQLRes(res);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return null;
     }
 
     @Override
