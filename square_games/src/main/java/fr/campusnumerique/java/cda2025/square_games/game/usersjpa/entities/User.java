@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.game.entities;
+package fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities;
 
 import jakarta.persistence.*;
 

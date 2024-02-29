@@ -1,6 +1,6 @@
-package fr.campusnumerique.java.cda2025.square_games.game.repositories;
+package fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories;
 
-import fr.campusnumerique.java.cda2025.square_games.game.entities.User;
+import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
