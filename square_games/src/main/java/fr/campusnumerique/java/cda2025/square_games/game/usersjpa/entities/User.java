@@ -13,6 +13,16 @@ public class User {
     private String lastName;
     private String pseudo;
 
+    public User() {
+    }
+
+    public User(UserDTO userDTO) {
+        this.id = userDTO.id();
+        this.firstName = userDTO.firstName();
+        this.lastName = userDTO.lastName();
+        this.pseudo = userDTO.lastName();
+    }
+
     public String getFirstName() {
         return firstName;
     }
