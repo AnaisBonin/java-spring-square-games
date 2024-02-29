@@ -25,4 +25,19 @@ public class UserController {
         return "Saved new user with pseudo: " + userDTO.pseudo();
     }
 
+    @GetMapping(path="/users")
+    public List<UserDTO> getUsers() {
+        List<UserDTO> allUsersDTO = new ArrayList<>();
+
+        Iterable<User> allUsers = userRepository.findAll();
+
+        while(allUsers.iterator().hasNext()) {
+            User user = allUsers.iterator().next();
+            allUsersDTO.add(user.toDTO());
+        }
+
+        return allUsersDTO;
+    }
+
+
 }
