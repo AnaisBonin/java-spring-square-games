@@ -1,5 +1,6 @@
 package fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities;
 
+import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -42,5 +43,9 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public UserDTO toDTO() {
+        return new UserDTO(this.id, this.firstName, this.lastName, this.pseudo);
     }
 }
