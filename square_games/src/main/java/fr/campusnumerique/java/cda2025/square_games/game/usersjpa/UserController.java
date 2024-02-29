@@ -14,4 +14,15 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @PostMapping(path="/add")
+    public @ResponseBody String addNewUser (@RequestParam UserDTO userDTO) {
+        User n = new User();
+        n.setFirstName(userDTO.firstName());
+        n.setLastName(userDTO.lastName());
+        n.setPseudo(userDTO.pseudo());
+        userRepository.save(n);
+
+        return "Saved new user with pseudo: " + userDTO.pseudo();
+    }
+
 }
