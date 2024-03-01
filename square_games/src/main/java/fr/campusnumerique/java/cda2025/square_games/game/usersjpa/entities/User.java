@@ -1,6 +1,5 @@
 package fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities;
 
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,11 +15,10 @@ public class User {
     public User() {
     }
 
-    public User(UserDTO userDTO) {
-        this.id = userDTO.id();
-        this.firstName = userDTO.firstName();
-        this.lastName = userDTO.lastName();
-        this.pseudo = userDTO.lastName();
+    public User(UserJpaDTO userJpaDTO) {
+        this.firstName = userJpaDTO.firstName();
+        this.lastName = userJpaDTO.lastName();
+        this.pseudo = userJpaDTO.lastName();
     }
 
     public String getFirstName() {
@@ -55,7 +53,7 @@ public class User {
         return id;
     }
 
-    public UserDTO toDTO() {
-        return new UserDTO(this.id, this.firstName, this.lastName, this.pseudo);
+    public UserJpaDTO toJpaDTO() {
+        return new UserJpaDTO(this.firstName, this.lastName, this.pseudo);
     }
 }

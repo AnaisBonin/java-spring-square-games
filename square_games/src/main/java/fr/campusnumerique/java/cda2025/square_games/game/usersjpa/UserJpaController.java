@@ -1,7 +1,7 @@
 package fr.campusnumerique.java.cda2025.square_games.game.usersjpa;
 
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.User;
+import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.UserJpaDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,50 +16,50 @@ public class UserJpaController {
     private UserRepository userRepository;
 
     @PostMapping(path = "/users")
-    public @ResponseBody String addNewUser(@RequestParam UserDTO userDTO) {
-        User user = new User(userDTO);
+    public UserJpaDTO addNewUser(@RequestBody UserJpaDTO userJpaDTO) {
+        User user = new User(userJpaDTO);
         userRepository.save(user);
 
-        return "Saved new user with pseudo: " + userDTO.pseudo();
+        return user.toJpaDTO();
     }
 
     @GetMapping(path = "/users")
-    public List<UserDTO> getUsers() {
-        List<UserDTO> allUsersDTO = new ArrayList<>();
+    public List<UserJpaDTO> getUsers() {
+        List<UserJpaDTO> allUsersDTO = new ArrayList<>();
 
         Iterable<User> allUsers = userRepository.findAll();
 
         if(allUsers != null){
             while (allUsers.iterator().hasNext()) {
                 User user = allUsers.iterator().next();
-                allUsersDTO.add(user.toDTO());
+                allUsersDTO.add(user.toJpaDTO());
             }
         }
-
+        System.out.println("GET ALL USERS");
         return allUsersDTO;
     }
 
     @GetMapping("/users/{userId}")
-    public UserDTO getUserById(@PathVariable Integer userId) throws Exception {
+    public UserJpaDTO getUserById(@PathVariable Integer userId) throws Exception {
 
         User user = userRepository.findById(userId).orElse(null);
         if(user != null) {
-            return user.toDTO();
+            return user.toJpaDTO();
         } else {
             throw new Exception();
         }
     }
 
     @PutMapping("/users/{userId}")
-    public UserDTO updateUser(@PathVariable int userId, @RequestBody UserDTO userDTO) throws Exception {
+    public UserJpaDTO updateUser(@PathVariable int userId, @RequestBody UserJpaDTO userJpaDTO) throws Exception {
         User user = userRepository.findById(userId).orElse(null);
 
         if (user != null) {
-            user.setFirstName(userDTO.firstName());
-            user.setLastName(userDTO.lastName());
-            user.setPseudo(userDTO.pseudo());
+            user.setFirstName(userJpaDTO.firstName());
+            user.setLastName(userJpaDTO.lastName());
+            user.setPseudo(userJpaDTO.pseudo());
             userRepository.save(user);
-            return user.toDTO();
+            return user.toJpaDTO();
         } else {
             throw new Exception();
         }
