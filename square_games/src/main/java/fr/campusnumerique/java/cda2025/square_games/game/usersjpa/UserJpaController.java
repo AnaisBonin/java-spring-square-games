@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-public class UserController {
+@RequestMapping("user-jpa")
+public class UserJpaController {
     @Autowired
     private UserRepository userRepository;
 
@@ -61,5 +61,11 @@ public class UserController {
         } else {
             throw new Exception();
         }
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public String deleteUser(@PathVariable int userId) {
+        userRepository.deleteById(userId);
+        return "User " + userId + " deleted";
     }
 }
