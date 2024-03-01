@@ -29,9 +29,11 @@ public class UserJpaController {
 
         Iterable<User> allUsers = userRepository.findAll();
 
-        while (allUsers.iterator().hasNext()) {
-            User user = allUsers.iterator().next();
-            allUsersDTO.add(user.toDTO());
+        if(allUsers != null){
+            while (allUsers.iterator().hasNext()) {
+                User user = allUsers.iterator().next();
+                allUsersDTO.add(user.toDTO());
+            }
         }
 
         return allUsersDTO;
