@@ -8,27 +8,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping(path="/users")
-    public @ResponseBody String addNewUser (@RequestParam UserDTO userDTO) {
+    @PostMapping(path = "/users")
+    public @ResponseBody String addNewUser(@RequestParam UserDTO userDTO) {
         User user = new User(userDTO);
         userRepository.save(user);
 
         return "Saved new user with pseudo: " + userDTO.pseudo();
     }
 
-    @GetMapping(path="/users")
+    @GetMapping(path = "/users")
     public List<UserDTO> getUsers() {
         List<UserDTO> allUsersDTO = new ArrayList<>();
 
         Iterable<User> allUsers = userRepository.findAll();
 
-        while(allUsers.iterator().hasNext()) {
+        while (allUsers.iterator().hasNext()) {
             User user = allUsers.iterator().next();
             allUsersDTO.add(user.toDTO());
         }
@@ -36,5 +37,29 @@ public class UserController {
         return allUsersDTO;
     }
 
+    @GetMapping("/users/{userId}")
+    public UserDTO getUserById(@PathVariable Integer userId) throws Exception {
 
+        User user = userRepository.findById(userId).orElse(null);
+        if(user != null) {
+            return user.toDTO();
+        } else {
+            throw new Exception();
+        }
+    }
+
+    @PutMapping("/users/{userId}")
+    public UserDTO updateUser(@PathVariable int userId, @RequestBody UserDTO userDTO) throws Exception {
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (user != null) {
+            user.setFirstName(userDTO.firstName());
+            user.setLastName(userDTO.lastName());
+            user.setPseudo(userDTO.pseudo());
+            userRepository.save(user);
+            return user.toDTO();
+        } else {
+            throw new Exception();
+        }
+    }
 }
