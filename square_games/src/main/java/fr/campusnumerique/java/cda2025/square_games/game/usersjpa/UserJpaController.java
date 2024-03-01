@@ -26,16 +26,12 @@ public class UserJpaController {
     @GetMapping(path = "/users")
     public List<UserJpaDTO> getUsers() {
         List<UserJpaDTO> allUsersDTO = new ArrayList<>();
-
         Iterable<User> allUsers = userRepository.findAll();
 
-        if(allUsers != null){
-            while (allUsers.iterator().hasNext()) {
-                User user = allUsers.iterator().next();
-                allUsersDTO.add(user.toJpaDTO());
-            }
+        for (User user : allUsers) {
+            allUsersDTO.add(user.toJpaDTO());
         }
-        System.out.println("GET ALL USERS");
+
         return allUsersDTO;
     }
 
@@ -43,7 +39,7 @@ public class UserJpaController {
     public UserJpaDTO getUserById(@PathVariable Integer userId) throws Exception {
 
         User user = userRepository.findById(userId).orElse(null);
-        if(user != null) {
+        if (user != null) {
             return user.toJpaDTO();
         } else {
             throw new Exception();
