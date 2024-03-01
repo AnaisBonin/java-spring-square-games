@@ -3,6 +3,8 @@ package fr.campusnumerique.java.cda2025.square_games.game.usersjpa;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.User;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.UserJpaDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +17,14 @@ public class UserJpaController {
     @Autowired
     private UserRepository userRepository;
 
+    private final Logger LOGGER = LoggerFactory.getLogger(UserJpaDTO.class);
+
     @PostMapping(path = "/users")
     public UserJpaDTO addNewUser(@RequestBody UserJpaDTO userJpaDTO) {
         User user = new User(userJpaDTO);
         userRepository.save(user);
 
+        LOGGER.info("Added new user");
         return user.toJpaDTO();
     }
 
@@ -42,6 +47,7 @@ public class UserJpaController {
         if (user != null) {
             return user.toJpaDTO();
         } else {
+            LOGGER.error("Error while getting user");
             throw new Exception();
         }
     }
