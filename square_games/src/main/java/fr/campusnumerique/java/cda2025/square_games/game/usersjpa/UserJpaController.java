@@ -2,8 +2,8 @@ package fr.campusnumerique.java.cda2025.square_games.game.usersjpa;
 
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.User;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.UserJpaDTO;
-import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories.UserRepository;
 
+import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +51,13 @@ public class UserJpaController {
             LOGGER.error("Error while getting user");
             throw new Exception();
         }
+    }
+
+    @GetMapping("users/{pseudo}")
+    public UserJpaDTO getUserByPseudo(@PathVariable String pseudo) {
+        User user = userRepository.findByPseudo(pseudo);
+
+        return user.toJpaDTO();
     }
 
     @PutMapping("/users/{userId}")
