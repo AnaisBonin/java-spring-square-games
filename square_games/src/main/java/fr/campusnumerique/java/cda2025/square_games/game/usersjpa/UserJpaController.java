@@ -53,7 +53,7 @@ public class UserJpaController {
         }
     }
 
-    @GetMapping("users/{pseudo}")
+    @GetMapping("users/pseudo/{pseudo}")
     public UserJpaDTO getUserByPseudo(@PathVariable String pseudo) {
         User user = userRepository.findByPseudo(pseudo);
 
