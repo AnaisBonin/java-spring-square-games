@@ -14,7 +14,7 @@
         </encoder>
     </appender>
     <logger name="square_games" level="debug" additivity="false">
-        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
     </logger>
     <root level="info">
         <appender-ref ref="CONSOLE"/>
