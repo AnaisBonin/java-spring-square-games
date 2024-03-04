@@ -69,6 +69,13 @@ public class UserJpaController {
         return user.toJpaDTO();
     }
 
+    @GetMapping("/users/pseudo/{pseudo}/id")
+    public int getUserKeyByPseudo(@PathVariable String pseudo) {
+        User user = userRepository.findByPseudo(pseudo);
+
+        return user.getId();
+    }
+
     @PutMapping("/users/{userId}")
     public UserJpaDTO updateUser(@PathVariable int userId, @RequestBody UserJpaDTO userJpaDTO) throws Exception {
         User user = userRepository.findById(userId).orElse(null);
