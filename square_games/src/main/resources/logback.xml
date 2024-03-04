@@ -16,4 +16,7 @@
     <logger name="square_games" level="debug" additivity="false">
         <appender-ref ref="FILE"/>
     </logger>
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
 </configuration>
