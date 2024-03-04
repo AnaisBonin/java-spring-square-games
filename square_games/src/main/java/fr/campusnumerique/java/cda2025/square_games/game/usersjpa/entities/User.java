@@ -14,15 +14,14 @@ public class User implements UserDetails {
     private Integer id;
     private String firstName;
     private String lastName;
-    private String pseudo;
-
+    private String username;
     private String password;
 
 
-    public User(UserJpaDTO userJpaDTO, String hashedPass) {
-        this.firstName = userJpaDTO.firstName();
-        this.lastName = userJpaDTO.lastName();
-        this.pseudo = userJpaDTO.lastName();
+    public User(createUserDTO createUserDTO, String hashedPass) {
+        this.firstName = createUserDTO.firstName();
+        this.lastName = createUserDTO.lastName();
+        this.username = createUserDTO.username();
         this.password = hashedPass;
     }
 
@@ -46,12 +45,9 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    public String getPseudo() {
-        return pseudo;
-    }
 
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
+    public void setUsername(String username) {
+        this.username =  username;
     }
 
     public void setId(int id) {
@@ -66,8 +62,8 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public UserJpaDTO toJpaDTO() {
-        return new UserJpaDTO(this.firstName, this.lastName, this.pseudo, "Encrypted");
+    public createUserDTO toJpaDTO() {
+        return new createUserDTO(this.firstName, this.lastName, this.  username, "Encrypted");
     }
 
     @Override
@@ -77,12 +73,12 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override

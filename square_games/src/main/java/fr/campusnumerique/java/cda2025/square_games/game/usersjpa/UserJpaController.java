@@ -1,7 +1,7 @@
 package fr.campusnumerique.java.cda2025.square_games.game.usersjpa;
 
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.User;
-import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.UserJpaDTO;
+import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.createUserDTO;
 
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories.UserRepository;
 import org.slf4j.Logger;
@@ -22,16 +22,16 @@ public class UserJpaController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(UserJpaDTO.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(createUserDTO.class);
 
     private String hashPassword(String userPassword) {
         return passwordEncoder.encode(userPassword);
     }
     @PostMapping(path = "/users")
-    public UserJpaDTO addNewUser(@RequestBody UserJpaDTO userJpaDTO) {
-        String hashedPass = hashPassword(userJpaDTO.password());
+    public createUserDTO addNewUser(@RequestBody createUserDTO createUserDTO) {
+        String hashedPass = hashPassword(createUserDTO.password());
 
-        User user = new User(userJpaDTO, hashedPass);
+        User user = new User(createUserDTO, hashedPass);
         userRepository.save(user);
 
         LOGGER.info("Added new user");
@@ -39,8 +39,8 @@ public class UserJpaController {
     }
 
     @GetMapping(path = "/users")
-    public List<UserJpaDTO> getUsers() {
-        List<UserJpaDTO> allUsersDTO = new ArrayList<>();
+    public List<createUserDTO> getUsers() {
+        List<createUserDTO> allUsersDTO = new ArrayList<>();
         Iterable<User> allUsers = userRepository.findAll();
 
         for (User user : allUsers) {
@@ -51,7 +51,7 @@ public class UserJpaController {
     }
 
     @GetMapping("/users/{userId}")
-    public UserJpaDTO getUserById(@PathVariable Integer userId) throws Exception {
+    public createUserDTO getUserById(@PathVariable Integer userId) throws Exception {
 
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
@@ -62,29 +62,29 @@ public class UserJpaController {
         }
     }
 
-    @GetMapping("users/pseudo/{pseudo}")
-    public UserJpaDTO getUserByPseudo(@PathVariable String pseudo) {
-        User user = userRepository.findByPseudo(pseudo);
+    @GetMapping("users/username/{username}")
+    public createUserDTO getUserByPseudo(@PathVariable String username) {
+        User user = userRepository.findByUsername(username);
 
         return user.toJpaDTO();
     }
 
-    @GetMapping("/users/pseudo/{pseudo}/id")
-    public int getUserKeyByPseudo(@PathVariable String pseudo) {
-        User user = userRepository.findByPseudo(pseudo);
+    @GetMapping("/users/username/{username}/id")
+    public int getUserKeyByUsername(@PathVariable String username) {
+        User user = userRepository.findByUsername(username);
 
         return user.getId();
     }
 
     @PutMapping("/users/{userId}")
-    public UserJpaDTO updateUser(@PathVariable int userId, @RequestBody UserJpaDTO userJpaDTO) throws Exception {
+    public createUserDTO updateUser(@PathVariable int userId, @RequestBody createUserDTO createUserDTO) throws Exception {
         User user = userRepository.findById(userId).orElse(null);
 
         if (user != null) {
-            user.setFirstName(userJpaDTO.firstName());
-            user.setLastName(userJpaDTO.lastName());
-            user.setPseudo(userJpaDTO.pseudo());
-            user.setPassword(hashPassword(userJpaDTO.password()));
+            user.setFirstName(createUserDTO.firstName());
+            user.setLastName(createUserDTO.lastName());
+            user.setUsername(createUserDTO.username());
+            user.setPassword(hashPassword(createUserDTO.password()));
             userRepository.save(user);
             return user.toJpaDTO();
         } else {
