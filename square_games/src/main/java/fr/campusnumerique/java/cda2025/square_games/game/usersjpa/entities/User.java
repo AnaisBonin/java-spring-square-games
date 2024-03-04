@@ -16,13 +16,18 @@ public class User implements UserDetails {
     private String lastName;
     private String pseudo;
 
-    public User() {
-    }
+    private String password;
 
-    public User(UserJpaDTO userJpaDTO) {
+
+    public User(UserJpaDTO userJpaDTO, String hashedPass) {
         this.firstName = userJpaDTO.firstName();
         this.lastName = userJpaDTO.lastName();
         this.pseudo = userJpaDTO.lastName();
+        this.password = hashedPass;
+    }
+
+    public User() {
+
     }
 
     public String getFirstName() {
@@ -57,8 +62,12 @@ public class User implements UserDetails {
         return id;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public UserJpaDTO toJpaDTO() {
-        return new UserJpaDTO(this.firstName, this.lastName, this.pseudo);
+        return new UserJpaDTO(this.firstName, this.lastName, this.pseudo, "Encrypted");
     }
 
     @Override

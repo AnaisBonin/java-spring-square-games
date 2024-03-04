@@ -7,6 +7,7 @@ import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories.U
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,11 +19,19 @@ public class UserJpaController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private final Logger LOGGER = LoggerFactory.getLogger(UserJpaDTO.class);
 
+    private String hashPassword(String userPassword) {
+        return passwordEncoder.encode(userPassword);
+    }
     @PostMapping(path = "/users")
     public UserJpaDTO addNewUser(@RequestBody UserJpaDTO userJpaDTO) {
-        User user = new User(userJpaDTO);
+        String hashedPass = hashPassword(userJpaDTO.password());
+
+        User user = new User(userJpaDTO, hashedPass);
         userRepository.save(user);
 
         LOGGER.info("Added new user");
@@ -68,6 +77,7 @@ public class UserJpaController {
             user.setFirstName(userJpaDTO.firstName());
             user.setLastName(userJpaDTO.lastName());
             user.setPseudo(userJpaDTO.pseudo());
+            user.setPassword(hashPassword(userJpaDTO.password()));
             userRepository.save(user);
             return user.toJpaDTO();
         } else {
