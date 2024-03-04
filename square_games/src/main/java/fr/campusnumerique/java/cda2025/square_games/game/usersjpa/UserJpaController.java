@@ -1,6 +1,5 @@
 package fr.campusnumerique.java.cda2025.square_games.game.usersjpa;
 
-import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.IUser;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.User;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.UserJpaDTO;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.repositories.UserRepository;
@@ -23,7 +22,7 @@ public class UserJpaController {
 
     @PostMapping(path = "/users")
     public UserJpaDTO addNewUser(@RequestBody UserJpaDTO userJpaDTO) {
-        IUser user = new User(userJpaDTO);
+        User user = new User(userJpaDTO);
         userRepository.save(user);
 
         LOGGER.info("Added new user");
@@ -33,9 +32,9 @@ public class UserJpaController {
     @GetMapping(path = "/users")
     public List<UserJpaDTO> getUsers() {
         List<UserJpaDTO> allUsersDTO = new ArrayList<>();
-        Iterable<IUser> allUsers = userRepository.findAll();
+        Iterable<User> allUsers = userRepository.findAll();
 
-        for (IUser user : allUsers) {
+        for (User user : allUsers) {
             allUsersDTO.add(user.toJpaDTO());
         }
 
@@ -45,7 +44,7 @@ public class UserJpaController {
     @GetMapping("/users/{userId}")
     public UserJpaDTO getUserById(@PathVariable Integer userId) throws Exception {
 
-        IUser user = userRepository.findById(userId).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
             return user.toJpaDTO();
         } else {
@@ -56,7 +55,7 @@ public class UserJpaController {
 
     @PutMapping("/users/{userId}")
     public UserJpaDTO updateUser(@PathVariable int userId, @RequestBody UserJpaDTO userJpaDTO) throws Exception {
-        IUser user = userRepository.findById(userId).orElse(null);
+        User user = userRepository.findById(userId).orElse(null);
 
         if (user != null) {
             user.setFirstName(userJpaDTO.firstName());
