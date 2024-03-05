@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.security;
+package fr.campusnumerique.java.cda2025.square_games.security.jwt;
 
 import io.jsonwebtoken.Jwts;
 
