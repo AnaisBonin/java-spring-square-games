@@ -27,8 +27,11 @@ import java.security.SecureRandom;
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
-        @Autowired
+    @Autowired
     private MyUserDetailsService userDetailsService;
+
+    @Autowired
+    private AuthenticationConfiguration authenticationConfiguration;
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -42,7 +45,7 @@ public class SecurityConfig {
 
 
     @Bean
-    public AuthenticationProvider authenticationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
@@ -51,11 +54,11 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
-        return new ProviderManager(authenticationProvider());
+        return authenticationConfiguration.getAuthenticationManager();
     }
 
     @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler(){
+    public AuthenticationFailureHandler authenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();
     }
 
@@ -72,10 +75,10 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests((req) -> req
-                    .requestMatchers("/home").permitAll()
-                    .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                    .requestMatchers("/user/**").hasAuthority("ROLE_USER")
-                    .anyRequest().authenticated()
+                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/user/**").hasAuthority("ROLE_USER")
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
