@@ -1,6 +1,5 @@
-package fr.campusnumerique.java.cda2025.square_games.game.plugins;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.plugins;
 
-import fr.le_campus_numerique.square_games.engine.GameFactory;
 import fr.le_campus_numerique.square_games.engine.connectfour.ConnectFourGameFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

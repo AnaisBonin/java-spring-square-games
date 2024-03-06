@@ -1,8 +1,8 @@
-package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.user;
 
 import fr.campusnumerique.java.cda2025.square_games.game.DbAccess;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DO.User;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DO.UserImpl;
 import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;

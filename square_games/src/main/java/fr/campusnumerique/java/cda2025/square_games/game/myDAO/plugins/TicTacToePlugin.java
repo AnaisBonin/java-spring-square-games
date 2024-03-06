@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.game.plugins;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.plugins;
 
 import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.game.controller.DO;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DO;
 
 public class GameCreationParams {
     private String gameType;

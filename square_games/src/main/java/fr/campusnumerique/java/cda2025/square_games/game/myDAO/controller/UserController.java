@@ -1,9 +1,9 @@
-package fr.campusnumerique.java.cda2025.square_games.game.controller;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller;
 
-import fr.campusnumerique.java.cda2025.square_games.game.DAO.user.UserDAO;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.UserImpl;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.UserDTO;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.user.UserDAO;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DO.User;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DO.UserImpl;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DTO.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

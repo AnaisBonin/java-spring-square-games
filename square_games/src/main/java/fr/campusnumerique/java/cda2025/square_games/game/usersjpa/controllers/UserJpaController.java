@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.game.usersjpa;
+package fr.campusnumerique.java.cda2025.square_games.game.usersjpa.controllers;
 
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.User;
 import fr.campusnumerique.java.cda2025.square_games.game.usersjpa.entities.createUserDTO;

@@ -1,4 +1,4 @@
-package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.user;
 
 import org.slf4j.LoggerFactory;
 

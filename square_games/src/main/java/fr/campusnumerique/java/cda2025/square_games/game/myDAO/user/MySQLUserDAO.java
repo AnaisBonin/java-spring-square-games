@@ -1,10 +1,6 @@
-package fr.campusnumerique.java.cda2025.square_games.game.DAO.user;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.user;
 
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.User;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.List;
-import java.util.UUID;
 
 @SpringBootApplication
 public class MySQLUserDAO {

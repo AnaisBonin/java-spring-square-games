@@ -1,7 +1,7 @@
-package fr.campusnumerique.java.cda2025.square_games.game.service.game_service;
+package fr.campusnumerique.java.cda2025.square_games.game.myDAO.service.game_service;
 
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DTO.GameDTO;
-import fr.campusnumerique.java.cda2025.square_games.game.controller.DO.GameCreationParams;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DTO.GameDTO;
+import fr.campusnumerique.java.cda2025.square_games.game.myDAO.controller.DO.GameCreationParams;
 import fr.le_campus_numerique.square_games.engine.Game;
 
 import java.util.Collection;
