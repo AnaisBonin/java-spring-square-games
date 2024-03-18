@@ -12,13 +12,13 @@ job_compilation:
         - echo "compilation with maven"
     artifacts:
         paths:
-            - target/compil
+            - ./square_games/target/compil
 
 job_package:
     stage: package
     script: 
         - echo "Push image to docker hub"
-        - echo ./target/compil
+        - echo ./square_games/target/compil
 
 job_deploy:
     stage: deploy
