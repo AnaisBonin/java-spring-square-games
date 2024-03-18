@@ -1,0 +1,6 @@
+stages: [compilation]
+
+job_compilation:
+    stage: compilation
+    image: mave:eclipse-temurin-21
+    script: echo "compilation with maven"
