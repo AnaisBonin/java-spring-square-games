@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("user-jpa")
+@RequestMapping("api")
 public class UserJpaController {
     @Autowired
     private UserRepository userRepository;
