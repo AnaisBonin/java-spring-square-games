@@ -2,8 +2,9 @@ stages: [compilation, package, deploy]
 
 job_compilation:
     stage: compilation
-    image: maven:eclipse-temurin-21
+    image: maven:3.9.6-eclipse-temurin-21
     before_script:
+        - cd square_games
         - mvn clean package
     script: 
         - echo "compilation with maven"
