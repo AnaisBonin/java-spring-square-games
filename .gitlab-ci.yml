@@ -5,7 +5,8 @@ job_compilation:
     image: maven:3.9.6-eclipse-temurin-21
     before_script:
         - echo "'{$M2_SETTINGS}'"
-        - touch ~/.m2/settings.xml < echo "'{$M2_SETTINGS}'"
+        - touch ~/.m2/settings.xml
+        - echo "'{$M2_SETTINGS}'" >> ~/.m2/settings.xml
         - cd square_games
         - mvn clean package
     script: 
