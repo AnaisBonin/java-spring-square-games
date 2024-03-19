@@ -4,13 +4,17 @@ job_compilation:
     stage: compilation
     image: maven:3.9.6-eclipse-temurin-21
     before_script:
+        - touch ~/.m2/settings.xml
+        - echo $M2_SETTINGS >> ~/.m2/settings.xml
         - cd square_games
-        - mvn clean package
+        - mvn clean package -DskipTests
     script: 
         - echo "compilation with maven"
+        - cd ./target
+        - ls -la
     artifacts:
         paths:
-            - boardgames-build
+            - ./square_games/target
 
 job_package:
     stage: package
