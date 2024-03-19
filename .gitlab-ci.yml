@@ -14,8 +14,14 @@ job_compilation:
 
 job_package:
     stage: package
-    script: 
+    before_script:
+        - echo "Build docker image and login"
+        - docker build -t $DOCKER_USER/squaregames:latest .
+        - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+    script:
         - echo "Push image to docker hub"
+        - docker tag squaregames:latest $DOCKER_USER/squaregames:latest
+        - push $DOCKER_USER/squaregames:latest
 
 job_deploy:
     stage: deploy
