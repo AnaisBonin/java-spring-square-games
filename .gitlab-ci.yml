@@ -32,7 +32,9 @@ job_package:
     stage: package
     script: 
         - echo "Push image to docker hub"
-        - cat ./Dockerfile
+        - pwd
+        - ls -la
+        - cat Dockerfile
         - echo ./square_games/target/*
 
 job_deploy:
