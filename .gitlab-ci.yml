@@ -10,6 +10,8 @@ job_compilation:
         - mvn clean package -DskipTests
     script: 
         - echo "compilation with maven"
+        - cd ./target
+        - ls -la
     artifacts:
         paths:
             - ./square_games/target
