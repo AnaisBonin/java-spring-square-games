@@ -16,10 +16,21 @@ job_compilation:
         paths:
             - ./square_games/target
 
+job_docker_image:
+    stage: package
+    script:
+        - touch Dockerfile
+        - echo "something" >> ./Dockerfile
+        - cat Dockerfile
+    artifacts:
+        paths:
+        - ./Dockerfile
+
 job_package:
     stage: package
     script: 
         - echo "Push image to docker hub"
+        - cat .Dockerfile
         - echo ./square_games/target/*
 
 job_deploy:
