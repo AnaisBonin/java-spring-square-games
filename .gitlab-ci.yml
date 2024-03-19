@@ -26,7 +26,7 @@ job_docker_image:
         - pwd
     artifacts:
         paths:
-        - ./Dockerfile
+            - Dockerfile
 
 job_package:
     stage: package
