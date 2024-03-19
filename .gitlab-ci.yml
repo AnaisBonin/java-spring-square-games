@@ -22,6 +22,8 @@ job_docker_image:
         - touch Dockerfile
         - echo "something" >> ./Dockerfile
         - cat Dockerfile
+        - ls -la
+        - pwd
     artifacts:
         paths:
         - ./Dockerfile
